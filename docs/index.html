@@ -1,1 +1,41 @@
 Hello World
+
+Section 1:
+what is SPARQL
+
+SELECT ?res WHERE {
+?src <http://dbpedia.org/class/yago/Senator110578471>
+}
+
+
+Section 2:
+what is a relationship?
+
+Subject
+Predicates
+Objects
+
+
+SELECT ?res WHERE {
+?src ?rel <http://dbpedia.org/class/yago/Senator110578471>
+}
+
+Section 3:
+putting everything together
+SELECT ?res WHERE {
+?src ?rel <http://dbpedia.org/class/yago/Senator110578471>.
+?src <http://dbpedia.org/property/spouse> ?res
+}
+
+Section 4:
+more multipart queries
+
+Section 5:
+Real world usage
+
+Section 6:
+Querying other sources
+
+Section 7:
+describe, ask, construct
+
