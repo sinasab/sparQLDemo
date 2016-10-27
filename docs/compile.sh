@@ -1,2 +1,2 @@
 #!/bin/bash
-node compile.js > sparQL.html
+node compile.js > index.html
