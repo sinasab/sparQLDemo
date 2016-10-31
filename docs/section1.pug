@@ -2,6 +2,20 @@ h1 Section 1
   h3 What is SPARQL?
     p Pronounced "sparkle"... it is a 'semantic querying language' for databases, able to retrieve and manipulate data stored in RDF (resource description framework) formats.
   h3 English pls
-    p It's a querying language (like SQL!) built for "semantic" queries. It's made to be used with large databases of information stored online in RDF format already. So if you wanted to write a query to find "what are all of the wives of US senators?", here's how we'd handle that:
+    p It's a querying language (like SQL!) built for "semantic" queries. It's made to be used with large databases of information stored online in RDF format already. So if you wanted to write a query to find "what are all of the spouses of US senators?", here's how we'd handle that:
   h3 Sample query
-    p sample query here
+  .query SELECT ?res WHERE {
+      ?src ?rel SENATOR .
+      ?src SPOUSE ?res .
+    }
+  h3 Magic?
+  p Nope! Under this framework, database items are thought about in terms of relationships with other objects. The entire database can be thought of as a bunch of subject-predicate-object triples! Variables begin with either '?' or '$'. What about the weird all-caps 'SENATOR' and 'SPOUSE'? We'll come back to that.
+  p Ok, now that we have some basic foundational knowledge about SPARQL...
+  h3 Let's break that previous query down!
+  ul
+    li We are selecting a variable called ?res, defined upon the following conditions
+    li The first line in our curly braces are defining variables ?src and ?rel; we are looking for any "thing" (?src) that has any "connection" or "relationship" to a 'senator' object.
+    li Then, for each of the resulting ?src, find all "things" (?res) that have the relationship of being a spouse with this ?src "thing".
+    li Jump back up to the outside of the query; we're selecting the variable ?res, so return those.
+    li That's it!
+  p The main thing to remember is that queries should be reasoned about in terms of subject-predicate-object triples... in this case, we want to find all subjects that are related to the object that describes a senator, and then we want to find all objects that have a relationship of "spouse" to one of these subjects. Easy!
