@@ -3,11 +3,11 @@
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
 }</div><h3>Magic?</h3><p>Nope! Under this framework, database items are thought about in terms of relationships with other objects. The entire database can be thought of as a bunch of subject-predicate-object triples! Variables begin with either '?' or '$'. What about the weird all-caps 'SENATOR' and 'SPOUSE'? We'll come back to that.</p><p>Ok, now that we have some basic foundational knowledge about SPARQL...</p><h3>Let's break that previous query down!</h3><ul><li>We are selecting a variable called ?res, defined upon the following conditions</li><li>The first line in our curly braces are defining variables ?src and ?rel; we are looking for any "thing" (?src) that has any "connection" or "relationship" to a 'senator' object.</li><li>Then, for each of the resulting ?src, find all "things" (?res) that have the relationship of being a spouse with this ?src "thing".</li><li>Jump back up to the outside of the query; we're selecting the variable ?res, so return those.</li><li>That's it!</li></ul><p>The main thing to remember is that queries should be reasoned about in terms of subject-predicate-object triples... in this case, we want to find all subjects that are related to the object that describes a senator, and then we want to find all objects that have a relationship of "spouse" to one of these subjects. Easy!</p><h3>Some more sample queries with explanations</h3><ul><li>Select all cats; find all objects with the relationship 'instance of' to the object 'cat'.<div class="query" style="white-space:pre">SELECT ?cat WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?cat INSTANCE_OF CAT
-}</div></li></ul></div><div><h1>Section 2</h1></div><div><h2>Section 3 - Real World Usage</h2><div><textarea rows="10" cols="100" id="input"></textarea></div><div><button id="query">query</button><button id="clear">clear</button></div><p id="result"></p><script>var query = function(e) {
+}</div></li></ul></div><div><h2>Section 2</h2></div><div><h2>Section 3 - Real World Usage</h2><div><textarea rows="10" cols="100" id="input"></textarea></div><div><button id="query">query</button><button id="clear">clear</button></div><p id="result"></p><script>var query = function(e) {
   var input = $("#input").val();
   console.log("click");
   $.ajax({
-    url: "http://dbpedia.org/sparql",
+    url: "https://dbpedia.org/sparql",
     method: "GET",
     data: {
       //query: "SELECT ?res WHERE {\
