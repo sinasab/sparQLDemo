@@ -1,6 +1,31 @@
-<!DOCTYPE html><html><body style="padding:10px 200px"><h1>Hello, SPARQL</h1><div><h2>Section 1 - The basics</h2><h3>What is SPARQL?</h3><p>Pronounced "sparkle"... it is a 'semantic querying language' for databases, able to retrieve and manipulate data stored in RDF (resource description framework) formats.</p><h3>English pls</h3><p>It's a querying language (like SQL!) built for "semantic" queries. It's made to be used with large databases of information stored online in RDF format already. So if you wanted to write a query to find "what are all of the spouses of US senators?", here's how we'd handle that:</p><h3>Sample query</h3><div class="query" style="white-space:pre">SELECT ?res WHERE {
+<!DOCTYPE html><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><html><body style="padding:10px 200px"><h1>Hello, SPARQL</h1><div><h2>Section 1 - The basics</h2><h3>What is SPARQL?</h3><p>Pronounced "sparkle"... it is a 'semantic querying language' for databases, able to retrieve and manipulate data stored in RDF (resource description framework) formats.</p><h3>English pls</h3><p>It's a querying language (like SQL!) built for "semantic" queries. It's made to be used with large databases of information stored online in RDF format already. So if you wanted to write a query to find "what are all of the spouses of US senators?", here's how we'd handle that:</p><h3>Sample query</h3><div class="query" style="white-space:pre">SELECT ?res WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
 }</div><h3>Magic?</h3><p>Nope! Under this framework, database items are thought about in terms of relationships with other objects. The entire database can be thought of as a bunch of subject-predicate-object triples! Variables begin with either '?' or '$'. What about the weird all-caps 'SENATOR' and 'SPOUSE'? We'll come back to that.</p><p>Ok, now that we have some basic foundational knowledge about SPARQL...</p><h3>Let's break that previous query down!</h3><ul><li>We are selecting a variable called ?res, defined upon the following conditions</li><li>The first line in our curly braces are defining variables ?src and ?rel; we are looking for any "thing" (?src) that has any "connection" or "relationship" to a 'senator' object.</li><li>Then, for each of the resulting ?src, find all "things" (?res) that have the relationship of being a spouse with this ?src "thing".</li><li>Jump back up to the outside of the query; we're selecting the variable ?res, so return those.</li><li>That's it!</li></ul><p>The main thing to remember is that queries should be reasoned about in terms of subject-predicate-object triples... in this case, we want to find all subjects that are related to the object that describes a senator, and then we want to find all objects that have a relationship of "spouse" to one of these subjects. Easy!</p><h3>Some more sample queries with explanations</h3><ul><li>Select all cats; find all objects with the relationship 'instance of' to the object 'cat'.<div class="query" style="white-space:pre">SELECT ?cat WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?cat INSTANCE_OF CAT
-}</div></li></ul></div><div><h1>Section 2</h1></div><div><h1>section 3</h1></div></body></html>
+}</div></li></ul></div><div><h1>Section 2</h1></div><div><h2>Section 3 - Real World Usage</h2><div><textarea rows="10" cols="100" id="input"></textarea></div><div><button id="query">query</button><button id="clear">clear</button></div><p id="result"></p><script>var query = function(e) {
+  var input = $("#input").val();
+  console.log("click");
+  $.ajax({
+    url: "http://dbpedia.org/sparql",
+    method: "GET",
+    data: {
+      //query: "SELECT ?res WHERE {\
+      //  ?src ?rel <http://dbpedia.org/class/yago/Senator110578471>.\
+      //  ?src <http://dbpedia.org/property/spouse> ?res\
+      //}"
+      query: input
+    },
+    dataType: "html",
+    success: function(data) {
+      $("#result").html(data);
+    },
+    error: function(error) {
+      console.log("error");
+    }
+  });
+}
+$("#query").click(query);
+$("#clear").click(function() {
+  $("#result").html("");
+});</script></div></body></html>
