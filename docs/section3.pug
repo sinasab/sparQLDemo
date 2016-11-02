@@ -4,7 +4,7 @@ div
 div
   button(id="query") query
   button(id="clear") clear
-p(id="result")
+pre(id="result")
 script.
   var query = function(e) {
     var input = $("#input").val();
@@ -17,7 +17,8 @@ script.
         //  ?src ?rel <http://dbpedia.org/class/yago/Senator110578471>.\
         //  ?src <http://dbpedia.org/property/spouse> ?res\
         //}"
-        query: input
+        query: input,
+        format: "application/sparql-results+json"
       },
       dataType: "html",
       success: function(data) {
