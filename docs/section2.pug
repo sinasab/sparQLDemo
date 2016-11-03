@@ -5,13 +5,14 @@ ul
   li DISTINCT - eliminates duplicate results
   li UNION - combines multiple query results
   li LIMIT - only returns the specified amount of triples
+  li FILTER - removes results that match the given pattern
 
 .query(style='white-space:pre;')
   |SELECT <b>DISTINCT</b> ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
   |}
-
+br
 .query(style='white-space:pre;')
   |SELECT DISTINCT ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
@@ -22,41 +23,58 @@ ul
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src CHILD ?res .
   |}
-  
-  
+br
 .query(style='white-space:pre;')
   |SELECT ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
-  |} 
-  <b>LIMIT</b> 100
+  |} <b>LIMIT</b> 100
+br
+.query(style='white-space:pre;')
+  |SELECT ?res WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |&nbsp;&nbsp;&nbsp;&nbsp;<b>FILTER</b>(STRLEN(?src)>10)
+  |}  
   
 h3 More complex queries
 p TODO: description, sample queries
 
-
-h3 graph patterns
-p TODO
+h3 Graph Patterns
+p A set of triple patterns between curly braces {} is called a graph pattern. They are the parameter for each of the SPARQL query forms. 
 
 h3 Construct, Ask, Describe
 p SPARQL is capable of much more than just retrieving data:
 ul
   li the Construct query creates your own data
-  li the Ask query determines if a graph describes a set of triples 
+  li the Ask query checks if the specified triples exist
   li the Describe asks the source to send more info 
 
 h3 Construct
-p TODO:description
 .query(style='white-space:pre;')
-  |<b>CONSTRUCT</b> {?src ?rel ?res} 
+  |<b>CONSTRUCT</b> {?res ?rel ?src} 
   |WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
   |}
 
 h3 Ask
-p TODO:description
+.query(style='white-space:pre;')
+  |<b>ASK</b> WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |}
+p This can be combined with FILTER to check if all the triples meet a criteria
+.query(style='white-space:pre;')
+  |<b>ASK</b> WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |&nbsp;&nbsp;&nbsp;&nbsp;FILTER(STRLEN(?src)<16)
+  |}
 
 h3 Describe
-p TODO:description
+p This is by far the simpliest query, however what information these queries return describe is not well-defined.
+.query(style='white-space:pre;')
+  |<b>DESCRIBE</b> SENATOR
+  
 
