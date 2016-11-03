@@ -20,10 +20,12 @@ ul
   li Jump back up to the outside of the query; we're selecting the variable ?res, so return those.
   li That's it!
 p The main thing to remember is that queries should be reasoned about in terms of subject-predicate-object triples... in this case, we want to find all subjects that are related to the object that describes a senator, and then we want to find all objects that have a relationship of "spouse" to one of these subjects. Easy!
-h3 Some more sample queries with explanations
-ul
-  li Select all cats; find all objects with the relationship 'instance of' to the object 'cat'.
+h3 Another Example Query
+p Select all cats; find all objects with the relationship 'instance of' to the object 'cat'.
+  p
     .query(style='white-space:pre;')
-      |SELECT ?cat WHERE {
-      |&nbsp;&nbsp;&nbsp;&nbsp;?cat INSTANCE_OF CAT
-      |}
+    |SELECT ?cat WHERE {
+    br
+    |&nbsp;&nbsp;&nbsp;&nbsp;?cat INSTANCE_OF CAT
+    br
+    |}
