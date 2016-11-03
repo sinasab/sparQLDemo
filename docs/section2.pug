@@ -1,1 +1,62 @@
 h2 Section 2
+
+h3 Helpful keywords
+ul
+  li DISTINCT - eliminates duplicate results
+  li UNION - combines multiple query results
+  li LIMIT - only returns the specified amount of triples
+
+.query(style='white-space:pre;')
+  |SELECT <b>DISTINCT</b> ?res WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |}
+
+.query(style='white-space:pre;')
+  |SELECT DISTINCT ?res WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |}
+  |<b>UNION</b>
+  |{
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src CHILD ?res .
+  |}
+  
+  
+.query(style='white-space:pre;')
+  |SELECT ?res WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |} 
+  <b>LIMIT</b> 100
+  
+h3 More complex queries
+p TODO: description, sample queries
+
+
+h3 graph patterns
+p TODO
+
+h3 Construct, Ask, Describe
+p SPARQL is capable of much more than just retrieving data:
+ul
+  li the Construct query creates your own data
+  li the Ask query determines if a graph describes a set of triples 
+  li the Describe asks the source to send more info 
+
+h3 Construct
+p TODO:description
+.query(style='white-space:pre;')
+  |<b>CONSTRUCT</b> {?src ?rel ?res} 
+  |WHERE {
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+  |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+  |}
+
+h3 Ask
+p TODO:description
+
+h3 Describe
+p TODO:description
+
