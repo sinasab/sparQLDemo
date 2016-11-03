@@ -3,10 +3,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
 }</div><h3>Magic?</h3><p>Nope! Under this framework, database items are thought about in terms of relationships with other objects. The entire database can be thought of as a bunch of subject-predicate-object triples! Variables begin with either '?' or '$'. What about the weird all-caps 'SENATOR' and 'SPOUSE'? We'll come back to that.</p><p>Ok, now that we have some basic foundational knowledge about SPARQL...</p><h3>Let's break that previous query down!</h3><ul><li>We are selecting a variable called ?res, defined upon the following conditions</li><li>The first line in our curly braces are defining variables ?src and ?rel; we are looking for any "thing" (?src) that has any "connection" or "relationship" to a 'senator' object.</li><li>Then, for each of the resulting ?src, find all "things" (?res) that have the relationship of being a spouse with this ?src "thing".</li><li>Jump back up to the outside of the query; we're selecting the variable ?res, so return those.</li><li>That's it!</li></ul><p>The main thing to remember is that queries should be reasoned about in terms of subject-predicate-object triples... in this case, we want to find all subjects that are related to the object that describes a senator, and then we want to find all objects that have a relationship of "spouse" to one of these subjects. Easy!</p><h3>Some more sample queries with explanations</h3><ul><li>Select all cats; find all objects with the relationship 'instance of' to the object 'cat'.<div class="query" style="white-space:pre">SELECT ?cat WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?cat INSTANCE_OF CAT
-}</div></li></ul></div><div><h2>Section 2</h2><h3>Helpful keywords</h3><ul><li>DISTINCT - eliminates duplicate results</li><li>UNION - combines multiple query results</li><li>LIMIT - only returns the specified amount of triples</li></ul><div class="query" style="white-space:pre">SELECT <b>DISTINCT</b> ?res WHERE {
+}</div></li></ul></div><div><h2>Section 2</h2><h3>Helpful keywords</h3><ul><li>DISTINCT - eliminates duplicate results</li><li>UNION - combines multiple query results</li><li>LIMIT - only returns the specified amount of triples</li><li>FILTER - removes results that match the given pattern</li></ul><div class="query" style="white-space:pre">SELECT <b>DISTINCT</b> ?res WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
-}</div><div class="query" style="white-space:pre">SELECT DISTINCT ?res WHERE {
+}</div><br><div class="query" style="white-space:pre">SELECT DISTINCT ?res WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
 }
@@ -14,14 +14,29 @@
 {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src CHILD ?res .
-}</div><div class="query" style="white-space:pre">SELECT ?res WHERE {
+}</div><br><div class="query" style="white-space:pre">SELECT ?res WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
-} <b>LIMIT</b> 100</div><h3>More complex queries</h3><p>TODO: description, sample queries</p><h3>graph patterns</h3><p>TODO</p><h3>Construct, Ask, Describe</h3><p>SPARQL is capable of much more than just retrieving data:</p><ul><li>the Construct query creates your own data</li><li>the Ask query determines if a graph describes a set of triples </li><li>the Describe asks the source to send more info </li></ul><h3>Construct</h3><p>TODO:description</p><div class="query" style="white-space:pre"><b>CONSTRUCT</b> {?src ?rel ?res} 
+} <b>LIMIT</b> 100</div><br><div class="query" style="white-space:pre">SELECT ?res WHERE {
+&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+&nbsp;&nbsp;&nbsp;&nbsp;<b>FILTER</b>(STRLEN(?src)>10)
+}  </div><h3>More complex queries</h3><p>TODO: description, sample queries</p><h3>Graph Patterns</h3><p>A set of triple patterns between curly braces {} is called a graph pattern. They are the parameter for each of the SPARQL query forms. </p><h3>Construct, Ask, Describe</h3><p>SPARQL is capable of much more than just retrieving data:</p><ul><li>the Construct query creates your own data</li><li>the Ask query checks if the specified triples exist</li><li>the Describe asks the source to send more info </li></ul><h3>Construct</h3><div class="query" style="white-space:pre"><b>CONSTRUCT</b> {?res ?rel ?src} 
 WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+<<<<<<< HEAD
 }</div><h3>Ask</h3><p>TODO:description</p><h3>Describe</h3><p>TODO:description</p></div><div><h2>Section 3 - Real World Usage</h2><h3>Using Sparql in Web Application</h3><div><textarea rows="10" cols="105" id="input" spellcheck="false"></textarea></div><div class="row"><button class="btn btn-default col-md-1 col-md-offset-1" id="query">query</button><button class="btn btn-default col-md-1 col-md-offset-3" id="clear">clear</button></div><div class="row" style="padding-top: 10px"><pre class="col-md-10 col-sm-10 col-xs-10" id="result" style="display: none"></pre></div><script>var query = function(e) {
+=======
+}</div><h3>Ask</h3><div class="query" style="white-space:pre"><b>ASK</b> WHERE {
+&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+}</div><p>This can be combined with FILTER to check if all the triples meet a criteria</p><div class="query" style="white-space:pre"><b>ASK</b> WHERE {
+&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
+&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
+&nbsp;&nbsp;&nbsp;&nbsp;FILTER(STRLEN(?src)<16)
+}</div><h3>Describe</h3><p>This is by far the simpliest query, however what information these queries return describe is not well-defined.</p><div class="query" style="white-space:pre"><b>DESCRIBE</b> SENATOR</div></div><div><h2>Section 3 - Real World Usage</h2><h3>Using Sparql in Web Application</h3><div><textarea rows="10" cols="105" id="input" spellcheck="false"></textarea></div><div class="row"><button class="btn btn-default col-md-1 col-md-offset-1" id="query">query</button><button class="btn btn-default col-md-1 col-md-offset-3" id="clear">clear</button></div><div class="row" style="padding-top: 10px"><pre class="col-md-8" id="result" style="display: none"></pre></div><script>var query = function(e) {
+>>>>>>> 891b659b5609fceee9740ba7d92bd73b3cc1d584
   var input = $("#input").val();
   $.ajax({
     url: "https://dbpedia.org/sparql",
