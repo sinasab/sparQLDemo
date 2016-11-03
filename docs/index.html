@@ -21,7 +21,7 @@
 WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
-}</div><h3>Ask</h3><p>TODO:description</p><h3>Describe</h3><p>TODO:description</p></div><div><h2>Section 3 - Real World Usage</h2><h3>Using Sparql in Web Application</h3><div><textarea rows="10" cols="105" id="input" spellcheck="false"></textarea></div><div class="row"><button class="btn btn-default col-md-1 col-md-offset-1" id="query">query</button><button class="btn btn-default col-md-1 col-md-offset-3" id="clear">clear</button></div><div class="row" style="padding-top: 10px"><pre class="col-md-8" id="result" style="display: none"></pre></div><script>var query = function(e) {
+}</div><h3>Ask</h3><p>TODO:description</p><h3>Describe</h3><p>TODO:description</p></div><div><h2>Section 3 - Real World Usage</h2><h3>Using Sparql in Web Application</h3><div><textarea rows="10" cols="105" id="input" spellcheck="false"></textarea></div><div class="row"><button class="btn btn-default col-md-1 col-md-offset-1" id="query">query</button><button class="btn btn-default col-md-1 col-md-offset-3" id="clear">clear</button></div><div class="row" style="padding-top: 10px"><pre class="col-md-10 col-sm-10 col-xs-10" id="result" style="display: none"></pre></div><script>var query = function(e) {
   var input = $("#input").val();
   $.ajax({
     url: "https://dbpedia.org/sparql",
@@ -44,4 +44,4 @@ $("#query").click(query);
 $("#clear").click(function() {
   $("#result").html("");
   $("#result").hide();
-});</script><h3>Quering Other Sources</h3></div></body></html>
+});</script><h3>Quering Other Sources</h3><a href="http://wordnet-rdf.princeton.edu/sparql/">wordnet</a></div></body></html>
