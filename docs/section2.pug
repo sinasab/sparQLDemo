@@ -9,13 +9,13 @@ ul
   li UNION - combines multiple query results
   li LIMIT - only returns the specified amount of triples
   li FILTER - removes results that match the given pattern
-
+hr
 .query(style='white-space:pre;')
   |SELECT <b>DISTINCT</b> ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
   |}
-br
+hr
 .query(style='white-space:pre;')
   |SELECT DISTINCT ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
@@ -26,13 +26,13 @@ br
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src CHILD ?res .
   |}
-br
+hr
 .query(style='white-space:pre;')
   |SELECT ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
   |} <b>LIMIT</b> 100
-br
+hr
 .query(style='white-space:pre;')
   |SELECT ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
@@ -107,4 +107,3 @@ br
   |&nbsp;&nbsp;&nbsp;&nbsp;?src StudentAt OSU.
   |&nbsp;&nbsp;&nbsp;&nbsp;?src FirstName ?res.
   |}
-
