@@ -1,12 +1,12 @@
 h2 Section 3 - Real World Usage
 h3 Using Sparql in Web Application
-div
+div.row
   textarea(rows="10" cols="105" id="input" spellcheck="false")
 div.row
   button(class="btn btn-default col-md-1 col-md-offset-1" id="query") query
   button(class="btn btn-default col-md-1 col-md-offset-3" id="clear") clear
 div.row(style="padding-top: 10px;")
-  pre(class="col-md-10" id="result" style="display: none;")
+  textarea(id="result" rows="15" cols="105")
 script.
   var query = function(e) {
     var input = $("#input").val();
@@ -19,8 +19,8 @@ script.
       },
       dataType: "text",
       success: function(data) {
-        $("#result").html(data);
-        $("#result").show();
+        $("#result").val(data);
+        // $("#result").show();
       },
       error: function(error) {
         console.log("error");
@@ -29,8 +29,29 @@ script.
   }
   $("#query").click(query);
   $("#clear").click(function() {
-    $("#result").html("");
-    $("#result").hide();
+    $("#result").val("");
+    // $("#result").hide();
   });
+h4 Code Snapshot
+div.row
+  pre(style="margin-left: 0px;").
+    var query = function(e) {
+      var input = $("#input").val();
+      $.ajax({
+        url: "https://dbpedia.org/sparql",
+        method: "GET",
+        data: {
+          query: input,
+          format: "application/sparql-results+json"
+        },
+        dataType: "text",
+        success: function(data) {
+          $("#result").val(data);
+          $("#result").show();
+        }
+      });
+    }
 h3 Quering Other Sources
-a(href="http://wordnet-rdf.princeton.edu/sparql/") wordnet
+h4
+  a(href="http://wordnet-rdf.princeton.edu/sparql/") WordNet
+  span  A lexical database for English
