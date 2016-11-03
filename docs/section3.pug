@@ -3,11 +3,15 @@ h3 Using Sparql in Web Application
 div.row
   textarea(rows="10" cols="105" id="input" spellcheck="false")
 div.row
-  button(class="btn btn-default col-md-1 col-md-offset-1" id="query") query
-  button(class="btn btn-default col-md-1 col-md-offset-3" id="clear") clear
+  button(class="btn btn-default col-md-1 col-md-offset-1" id="query") run query
+  select#prewrittenQueries.btn.btn-default.col-md-1.col-md-offset-1
+    for k in Object.keys(prewrittenQueries)
+      option(value=k) #{k}
+  button(class="btn btn-default col-md-1 col-md-offset-1" id="clear") clear
 div.row(style="padding-top: 10px;")
   textarea(id="result" rows="15" cols="105")
 script.
+  const prewrittenQueries = !{JSON.stringify(prewrittenQueries)}
   var query = function(e) {
     var input = $("#input").val();
     $.ajax({
@@ -32,6 +36,10 @@ script.
     $("#result").val("");
     // $("#result").hide();
   });
+  $('#prewrittenQueries').change(e => {
+    // console.log('setting query box text to', e.target.value);
+    document.querySelector('textarea#input').value = prewrittenQueries[e.target.value] || '';
+  });
 h4 Code Snapshot
 div.row
   pre(style="margin-left: 0px;").
@@ -55,3 +63,6 @@ h3 Quering Other Sources
 h4
   a(href="http://wordnet-rdf.princeton.edu/sparql/") WordNet
   span  A lexical database for English
+h4
+  a(href="https://query.wikidata.org") WikiData Endpoint
+  span An endpoint for wikidata
