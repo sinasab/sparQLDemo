@@ -32,12 +32,12 @@ WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;FILTER(STRLEN(?src)<16)
 }</div><h3>Describe</h3><p>This is by far the simpliest query, however what information these queries return describe is not well-defined.</p><div class="query" style="white-space:pre"><b>DESCRIBE</b> SENATOR</div><h3>Try it yourself!</h3><p>Using these keywords even more complex queries can be created! Try out the following problems:</p><br><p>Find every type of bird that live in Ohio and Indiana.</p><br><p>Find 100 cities that are not in Ohio.</p><br><p>Find every unique first name for students at OSU</p><h3>Answers</h3><div class="query" style="white-space:pre">SELECT ?src WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src InstanceOf Bird .
-&nbsp;&nbsp;&nbsp;&nbsp;?src Lives Ohio.
+&nbsp;&nbsp;&nbsp;&nbsp;?src LivesInState Ohio.
 }
 UNION
 {
 &nbsp;&nbsp;&nbsp;&nbsp;?src InstanceOf Bird .
-&nbsp;&nbsp;&nbsp;&nbsp;?src Lives Indiana.
+&nbsp;&nbsp;&nbsp;&nbsp;?src LivesInState Indiana.
 }</div><hr><div class="query" style="white-space:pre">SELECT ?src WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src InstanceOf City.
 &nbsp;&nbsp;&nbsp;&nbsp;?src InState ?res.
