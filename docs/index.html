@@ -30,7 +30,7 @@ WHERE {
 &nbsp;&nbsp;&nbsp;&nbsp;?src ?rel SENATOR .
 &nbsp;&nbsp;&nbsp;&nbsp;?src SPOUSE ?res .
 &nbsp;&nbsp;&nbsp;&nbsp;FILTER(STRLEN(?src)<16)
-}</div><h3>Describe</h3><p>This is by far the simpliest query, however what information these queries return describe is not well-defined.</p><div class="query" style="white-space:pre"><b>DESCRIBE</b> SENATOR</div></div><div class="col-md-8 col-md-offset-2"><h2>Section 3 - Real World Usage</h2><h3>Using Sparql in Web Application</h3><div class="row"><textarea rows="10" cols="105" id="input" spellcheck="false"></textarea></div><div class="row"><button class="btn btn-default col-md-1 col-md-offset-1" id="query">run query</button><select class="btn btn-default col-md-1 col-md-offset-1" id="prewrittenQueries"><option value="clear">clear</option><option value="Senators' Spouses">Senators' Spouses</option></select><button class="btn btn-default col-md-1 col-md-offset-1" id="clear">clear</button></div><div class="row" style="padding-top: 10px"><textarea id="result" rows="15" cols="105"></textarea></div><script>const prewrittenQueries = {"clear":"","Senators' Spouses":"SELECT ?res WHERE  {\n  ?src ?rel <http://dbpedia.org/class/yago/Senator110578471> .\n  ?src <http://dbpedia.org/property/spouse> ?res .\n}"}
+}</div><h3>Describe</h3><p>This is by far the simpliest query, however what information these queries return describe is not well-defined.</p><div class="query" style="white-space:pre"><b>DESCRIBE</b> SENATOR</div></div><div class="col-md-8 col-md-offset-2"><h2>Section 3 - Real World Usage</h2><h3>Using Sparql in Web Application</h3><div class="row"><textarea rows="10" cols="105" id="input" spellcheck="false"></textarea></div><div class="row"><button class="btn btn-default col-md-1 col-md-offset-1" id="query">run query</button><select class="btn btn-default col-md-1 col-md-offset-1" id="prewrittenQueries"><option value="clear">clear</option><option value="Senators' Spouses">Senators' Spouses</option><option value="Senators who were also Presidents">Senators who were also Presidents</option></select><button class="btn btn-default col-md-1 col-md-offset-1" id="clear">clear</button></div><div class="row" style="padding-top: 10px"><textarea id="result" rows="15" cols="105"></textarea></div><script>const prewrittenQueries = {"clear":"","Senators' Spouses":"SELECT ?res WHERE  {\n  ?src ?rel <http://dbpedia.org/class/yago/Senator110578471> .\n  ?src <http://dbpedia.org/property/spouse> ?res .\n}","Senators who were also Presidents":"SELECT ?src WHERE  {\n  ?src ?rel <http://dbpedia.org/class/yago/Senator110578471> .\n  ?src ?rel <http://dbpedia.org/class/yago/WikicatPresidentsOfTheUnitedStates> .\n}"}
 var query = function(e) {
   var input = $("#input").val();
   $.ajax({
@@ -56,7 +56,7 @@ $("#clear").click(function() {
   // $("#result").hide();
 });
 $('#prewrittenQueries').change(e => {
-  console.log('setting query box text to', e.target.value);
+  // console.log('setting query box text to', e.target.value);
   document.querySelector('textarea#input').value = prewrittenQueries[e.target.value] || '';
 });</script><h4>Code Snapshot</h4><div class="row"><pre style="margin-left: 0px">var query = function(e) {
   var input = $("#input").val();
