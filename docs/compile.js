@@ -10,6 +10,9 @@ const prewrittenQueries = {
   ?src ?rel <http://dbpedia.org/class/yago/Senator110578471> .
   ?src ?rel <http://dbpedia.org/class/yago/WikicatPresidentsOfTheUnitedStates> .
 }`,
+  'NBA': `SELECT * WHERE {
+    ?player <http://dbpedia.org/property/league> <http://dbpedia.org/resource/National_Basketball_Association>
+  }`
 };
 
 console.log(pug.renderFile('layout.pug', { prewrittenQueries }));
