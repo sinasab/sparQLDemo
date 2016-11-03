@@ -94,14 +94,14 @@ h3 Answers
   |&nbsp;&nbsp;&nbsp;&nbsp;?src InstanceOf Bird .
   |&nbsp;&nbsp;&nbsp;&nbsp;?src Lives Indiana.
   |}
-br
+hr
 .query(style='white-space:pre;')
   |SELECT ?src WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src InstanceOf City.
   |&nbsp;&nbsp;&nbsp;&nbsp;?src InState ?res.
   |&nbsp;&nbsp;&nbsp;&nbsp;FILTER(!(?res="Ohio"))
   |} LIMIT 100
-br
+hr
 .query(style='white-space:pre;')
   |SELECT DISTINCT ?res WHERE {
   |&nbsp;&nbsp;&nbsp;&nbsp;?src StudentAt OSU.
